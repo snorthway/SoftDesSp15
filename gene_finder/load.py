@@ -7,6 +7,7 @@ Created on Sat Feb  1 22:02:04 2014
 
 from os import path
 
+
 def load_seq(fasta_file):
     """ Reads a FASTA file and returns the DNA sequence as a string.
 
@@ -20,14 +21,15 @@ def load_seq(fasta_file):
         retval += l[0:-1]
     f.close()
     return retval
-    
+
+
 def load_salmonella_genome():
-    f = open(path.join('.','data','salmonella_all_proteins'))
+    f = open(path.join('.', 'data', 'salmonella_all_proteins'))
     lines = f.readlines()
     retval = []
     gene = []
     is_amino_acid_seq = False
-    
+
     for line in lines:
         if line[5:].find("CDS") == 0:
             coords = line[21:-1]
@@ -51,6 +53,6 @@ def load_salmonella_genome():
                 is_amino_acid_seq = False
                 gene.append(amino_acid_seq)
     if len(gene) == 3:
-         retval.append(gene)
+        retval.append(gene)
     f.close()
     return retval

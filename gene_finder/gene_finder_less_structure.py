@@ -11,12 +11,13 @@ from amino_acids_less_structure import aa, codons
 import random
 from load import load_seq
 
-### YOU WILL START YOUR IMPLEMENTATION FROM HERE DOWN ###
+# YOU WILL START YOUR IMPLEMENTATION FROM HERE DOWN
+
 
 def find_all_ORFs_both_strands(dna):
     """ Finds all non-nested open reading frames in the given DNA sequence on both
         strands.
-        
+
         dna: a DNA sequence
         returns: a list of non-nested ORFs
     >>> find_all_ORFs_both_strands("ATGCGAATGTAGCATCAAA")
@@ -24,6 +25,7 @@ def find_all_ORFs_both_strands(dna):
     """
     # TODO: implement this
     pass
+
 
 def longest_ORF(dna):
     """ Finds the longest ORF on both strands of the specified DNA and returns it
@@ -38,18 +40,19 @@ def longest_ORF(dna):
 def longest_ORF_noncoding(dna, num_trials):
     """ Computes the maximum length of the longest ORF over num_trials shuffles
         of the specfied DNA sequence
-        
+
         dna: a DNA sequence
         num_trials: the number of random shuffles
         returns: the maximum length longest ORF """
     # TODO: implement this
     pass
 
+
 def coding_strand_to_AA(dna):
     """ Computes the Protein encoded by a sequence of DNA.  This function
         does not check for start and stop codons (it assumes that the input
         DNA sequence represents an protein coding region).
-        
+
         dna: a DNA sequence represented as a string
         returns: a string containing the sequence of amino acids encoded by the
                  the input DNA fragment
@@ -62,10 +65,11 @@ def coding_strand_to_AA(dna):
     # TODO: implement this
     pass
 
+
 def gene_finder(dna, threshold):
     """ Returns the amino acid sequences coded by all genes that have an ORF
         larger than the specified threshold.
-        
+
         dna: a DNA sequence
         threshold: the minimum length of the ORF for it to be considered a valid
                    gene.
