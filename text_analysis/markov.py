@@ -156,7 +156,7 @@ def generate_text(reference_dict, sentences=5):
     wordstring = ' '.join(words)
     for p in remove_chars(string.punctuation, '('):
         wordstring = wordstring.replace(' '+p, p)
-    return wordstring
+    return wordstring + '\n'
 
 
 def mash_references(r1, r2):
@@ -184,4 +184,4 @@ if __name__ == '__main__':
     # huck_finn = load_reference(filepath='huck_finn.p')
     # critique = load_reference(filepath='critique_of_pure_reason.p')
     # huck_finn_of_pure_reason = mash_references(huck_finn, critique)
-    print generate_text(load_reference('huck_finn_of_pure_reason.p'), sentences=3)
+    print generate_text(load_reference('huck_finn_of_pure_reason.p'), sentences=1)
