@@ -119,7 +119,7 @@ if __name__ == '__main__':
             - spell_check_alg2
             - spell_check_alg3
     """
-    spell_check = spell_check_alg1
+    spell_check = spell_check_alg2
     n_trials = 1                   # the number of times to repeat a run
     """ Specifies the number of words of the constitution to spell check.  Note:
         we start from the beginning of the constitution and check until the
