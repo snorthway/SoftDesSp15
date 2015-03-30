@@ -58,8 +58,12 @@ class GridWorld():
             return False
 
     def _add_swamp(self, mouse_pos):
-        #insert swamp code here.
-        pass
+        swamp_coord = (mouse_pos[0]/50, mouse_pos[1]/50)
+        if self._is_occupied(swamp_coord):
+            if self.actors[swamp_coord].unremovable is False:
+                self.actors.pop(swamp_coord, None)
+        else:
+            self.actors[swamp_coord] = ObstacleTile(swamp_coord, self, './images/swamp.jpg', is_unpassable=False, terrain_cost=3)
 
     def _add_lava(self, mouse_pos):
         lava_coord = (mouse_pos[0]/50, mouse_pos[1]/50)
@@ -92,14 +96,17 @@ class GridWorld():
                 elif event.type is pygame.MOUSEBUTTONDOWN:
                     if self.add_tile_type == 'lava':
                         self._add_lava(event.pos)
-                    #insert swamp code here
+                    elif self.add_tile_type == 'swamp':
+                        self._add_swamp(event.pos)
+
                 elif event.type is pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.paul.run_astar(self.cake.cell_coordinates,  self)
                         self.paul.get_path()
                     elif event.key == pygame.K_l:
                         self.add_tile_type = 'lava'
-                    #insert swamp code here
+                    elif event.key == pygame.K_s:
+                        self.add_tile_type = 'swamp'
 
 
 class Actor(object):
@@ -145,10 +152,10 @@ class Cell():
         return self.g_cost + self.h_cost
 
     def draw(self):
-        COST_TO_DRAW = ''
+        # COST_TO_DRAW = ''
         # COST_TO_DRAW = self.g_cost
         # COST_TO_DRAW = self.h_cost
-        # COST_TO_DRAW = self.f_cost
+        COST_TO_DRAW = self.f_cost
         line_width = 2
         rect = pygame.Rect((self.coordinates[0], self.coordinates[1]), (self.dimensions[0], self.dimensions[1]))
         pygame.draw.rect(self.draw_screen,  self.color,  rect,  line_width)
@@ -171,12 +178,22 @@ class Paul(Actor):
     def get_open_adj_coords(self, coords):
         """returns list of valid coords that are adjacent to the argument, open, and not in the closed list."""
         #modify directions and costs as needed
-        directions = [(1,0),(0,1),(-1,0),(0,-1)]
-        costs = [1,1,1,1]
-        adj_coords = map(lambda d: self.world._add_coords(coords,d), directions)
-        for i, coord in enumerate(adj_coords):
+        directions = [(1,0), (0,1), (-1,0), (0,-1), (1, 1), (1, -1), (-1, 1), (-1, -1)]
+        costs = [1, 1, 1, 1, 3, 3, 3, 3]
+        adj_coords = map(lambda d: self.world._add_coords(coords, d), directions)
+        for i, coord in enumerate(adj_coords):  # note to self, this is nice syntax
             costs[i] += self.world.get_terrain_cost(coord)
+
+        # "Paul gets hops"
+        for c in adj_coords:
+            if self.world._is_in_grid(c) and c not in self.closed_list:
+                jump_coord = tuple([x*2 for x in c])
+                if self.world._is_occupied(c) and not self.world._is_occupied(jump_coord):
+                    adj_coords.append(jump_coord)
+                    costs.append(8)
+
         in_bounds = [self.world._is_in_grid(c) and not self.world._is_occupied(c) and c not in self.closed_list for c in adj_coords]
+
         adj_coords = [c for (idx, c) in enumerate(adj_coords) if in_bounds[idx]]
         costs = [c for (idx, c) in enumerate(costs) if in_bounds[idx]]
         return adj_coords,  costs
