@@ -1,0 +1,7 @@
+1.) The general trend in the curve is up and to the right. This makes sense, since in general the more training data is used the better the model becomes (i.e., it is less likely to overfit to the training data).
+
+2.) The higher train percentages had a lot less error than the lower ones.
+
+3.) Around 20 produces a pretty smooth curve. Also takes forever.
+
+4.) I tried it with the default (C=1.0), it took a very long time and produced a curve that was more like a logarithmic function than a straight line. 
