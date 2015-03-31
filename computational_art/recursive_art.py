@@ -8,6 +8,15 @@ import math
 import random
 from PIL import Image
 
+"""
+Super nice set up of your functions. I mean, obviously, you code, but still :)
+You added more comments this time too, which made things clear.
+
+Could you work on adding more unit tests though? Also, I know you're a senior and all,
+but I know you can easily go above and beyond with adding extra things to these, 
+and it would be really cool if you did.
+"""
+
 FUNCTIONS = {
     'x': lambda x, y: x,
     'y': lambda x, y: y,
@@ -16,7 +25,7 @@ FUNCTIONS = {
     'cos_pi': lambda x: math.cos(math.pi * x),
     'sin_pi': lambda x: math.sin(math.pi * x)
 }
-
+#yay this is super nice, splitting up these funtions like this. :)
 
 def build_random_function(min_depth, max_depth):
     """ Builds a random function of depth at least min_depth and depth
@@ -50,6 +59,7 @@ def build_random_function(min_depth, max_depth):
 
     return build(depth)
 
+    #Wow..this is so nice. Really clear and short implementation. You should add some tests though
 
 def evaluate_random_function(f, x, y):
     """ Evaluate the random function f with inputs x,y
@@ -68,7 +78,7 @@ def evaluate_random_function(f, x, y):
         return FUNCTIONS[f[0]](x, y)
     else:
         # 1 argument if sine or cosine, otherwise 2
-        if f[0].endswith('pi'):
+        if f[0].endswith('pi'): #Wait, what is endswith('pi')?
             return FUNCTIONS[f[0]](evaluate_random_function(f[1], x, y))
         else:
             return FUNCTIONS[f[0]](evaluate_random_function(f[1], x, y), evaluate_random_function(f[2], x, y))
@@ -112,6 +122,8 @@ def remap_interval(val, input_interval_start, input_interval_end, output_interva
     percent_across = (val-input_interval_start)/len_input_interval
     # multiply that percentage by the new range and add it to the start of the range
     return percent_across * len_output_interval + output_interval_start
+
+    #Totally works, but this one function seems kind along. Thanks for adding comments.
 
 
 def color_map(val):
