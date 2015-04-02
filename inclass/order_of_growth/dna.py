@@ -2,6 +2,7 @@
 
 from random import randint
 import time
+import matplotlib.pyplot as plt
 
 def generate_random_dna(n):
     """ Generate a random DNA sequence of length n """
@@ -56,19 +57,29 @@ def reverse_complement_2(dna):
     return "".join(return_val)
 
 if __name__ == '__main__':
-    dna_length = 100
-    import doctest
-    doctest.testmod()
-    dna = generate_random_dna(dna_length)
-    start_time = time.time()
-    rev_complement = reverse_complement_1(dna)
-    stop_time = time.time()
+    dna_length = range(50, 5000, 50)
+    times_1 = []
+    times_2 = []
+    # import doctest
+    # doctest.testmod()
+    for l in dna_length:
+        dna = generate_random_dna(l)
+        start_time = time.time()
+        rev_complement = reverse_complement_1(dna)
+        stop_time = time.time()
 
-    print stop_time - start_time
+        times_1.append(stop_time - start_time)
 
-    dna = generate_random_dna(dna_length)
-    start_time = time.time()
-    rev_complement = reverse_complement_2(dna)
-    stop_time = time.time()
+        dna = generate_random_dna(l)
+        start_time = time.time()
+        rev_complement = reverse_complement_2(dna)
+        stop_time = time.time()
 
-    print stop_time - start_time
+        times_2.append(stop_time - start_time)
+
+    plt.plot(dna_length, times_1, 'b', label="alg 1")
+    plt.plot(dna_length, times_2, 'r', label="alg 2")
+    plt.xlabel('Length of DNA sequence')
+    plt.ylabel('Time to run')
+    plt.legend(loc='best')
+    plt.show()

@@ -119,18 +119,18 @@ if __name__ == '__main__':
             - spell_check_alg2
             - spell_check_alg3
     """
-    spell_check = spell_check_alg2
-    n_trials = 1                   # the number of times to repeat a run
+    spell_check = spell_check_alg1
+    n_trials = 10                   # the number of times to repeat a run
     """ Specifies the number of words of the constitution to spell check.  Note:
         we start from the beginning of the constitution and check until the
         word limit is reached
     """
     num_words_to_check = 2000
-    make_plot = False               # Should we make a plot of running time versus input size?
+    make_plot = True               # Should we make a plot of running time versus input size?
 
-    skip_factors = range(1,20)     # which skip factors to test 
+    skip_factors = range(1, 20)     # which skip factors to test 
     if not(make_plot):
-        spell_check(1,num_words_to_check)
+        spell_check(1, num_words_to_check)
     else:
         total_words = len(load_words_as_list(1))
         trials = np.zeros((n_trials,len(skip_factors)))
