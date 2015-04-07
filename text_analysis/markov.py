@@ -10,6 +10,22 @@ Last updated February 24, 2015
 @author: Stephanie Northway
 
 """
+
+"""
+Hmm, it seems like you already said it best in your reflection. Perhaps you ran out of time on this
+project and couldn't do much with cleaning up your code, or using libraries more to make it more
+intuitive and readable. Similarly, you didn't do any testing, sadface :( 
+
+I know you know how to do that though, so I'm not going to go into the specifics of how you could improve,
+I think you know on your own. Cool result though, I enjoyed reading the mashup.
+
++Functionality: 5/5
++Documentation: 4/5 (Test, comment)
++Style: 4/5 (Clean up, could use pattern more to shorten code)
++CheckIn: yes
++Total: 4.25/5
+
+"""
 import string
 import pickle
 import random
